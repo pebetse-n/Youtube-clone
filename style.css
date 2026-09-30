@@ -20,9 +20,10 @@ body {
 .navbar .logo {
     display: flex;
     align-items: center;
+    margin-left: 8px;
 }
 
-.logo .img {
+.logo img {
     width: 100px;
     margin-left: 10px;
 }
@@ -83,13 +84,30 @@ sup {
 .mainbody {
     height: calc(100vh - 56px);
     display: flex;
+    overflow: hidden;
     }
 
 .categories {
     width: 240px;
     height: 100%;
     background: white;
-   
+    overflow-y: scroll;
+}
+
+.category-section {
+    border-bottom: 1px solid #cccccc;
+    margin-top: 10px;
+}
+
+.category-section .category:last-child {
+    margin-bottom: 10px;
+}
+
+.catergory_heading {
+    margin: 10px 0px 10px 25px;
+    color: #606060;
+    font-size: 14px;
+    font-weight: 500;
 }
 
 .category {
@@ -116,13 +134,88 @@ sup {
     margin-right: 24px;
 }
 
-.category .active {
-    background: #f2f2f2;
+.active {
+    background: #d0d0d0;
     font-weight: 500;
 }
 
+.active:hover {
+    background: #d0d0d0;
+}
+
+.catergories-footer {
+    padding: 25px;
+}
+
+.footer-section {
+    margin-bottom: 10px;
+}
+
+.footer-section span {
+    font-size: 13px;
+    font-weight: 500;
+    color: #606060;
+    cursor: pointer;
+}
+
+.copyright {
+    color: #606060;
+     font-size: 13px;
+    font-weight: 400;
+    margin-bottom: 20px;
+}
+ /* Video Section */
 .videos {
     width: calc(100vw - 240px);
     height: 100%;
-    background: white;
+    background: #f9f9f9;
+    border-top: 1px solid #cccccc;
 }
+
+.video-grid {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 15px;
+}
+
+.video {
+    width: calc(25% - 12px);
+    margin-right: 12px;
+    cursor: pointer;
+    margin-bottom: 36px;
+}
+
+.video .thumbnail img {
+    width: 100%;
+
+}
+
+.video .details {
+    display: flex;
+    margin-top: 5px;
+    width: 90%;
+}
+
+.video .profile {
+    margin-right: 12px;
+}
+
+.video .profile img {
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+}
+
+.video .video-title p {
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 20px;
+}
+
+.video .posted-by {
+    font-size: 14px;
+    font-weight: 500;
+    color: #606060;
+}
+
+
