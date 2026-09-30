@@ -170,6 +170,7 @@ sup {
     height: 100%;
     background: #f9f9f9;
     border-top: 1px solid #cccccc;
+    overflow-y: scroll;
 }
 
 .video-grid {
