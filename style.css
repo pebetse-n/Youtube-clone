@@ -32,6 +32,16 @@ body {
     display: flex;
 }
 
+.searchbar img.material-icons {
+    width: 40px;
+    height: 40px;
+    padding: 10px;
+    border-radius: 50%;
+    background-color: #f2f2f2;
+    object-fit: contain;
+    cursor: pointer;
+}
+
 .material-icons {
     padding: 5px;
     border-radius: 25px;
@@ -53,11 +63,11 @@ sup {
 .search {
     display: flex;
     border: 1px solid #cccccc;
+    border-radius: 24px;
+    overflow: hidden;
+    background: white;
     width: 640px;
     margin-right: 10px;
-
-    /* border-top-left-radius: 15px;
-    border-bottom-left-radius: 15px; */
 }
 
 .search input {
@@ -77,9 +87,44 @@ sup {
     padding: 2px;
 }
 
+
 .navigation-icons {
+    display: flex;
+    align-items: center;
+    gap: 10px;
     margin-left: 10px;
 }
+    
+
+#create-icon {
+    margin-right: 10px;
+    
+}
+
+.buttons {
+    display: flex;
+    align-items: center;
+
+    padding: 10px;
+
+    border-radius: 25px;
+    background-color: #f2f2f2;
+
+    gap: 8px
+}
+
+#avatar {
+    height: 30px;
+    border-radius: 15px;
+    margin-right: 10px;
+}
+
+#notification {
+    margin-right: 10px;
+}
+
+
+ /* Sidebar section */
 
 .mainbody {
     height: calc(100vh - 56px);
