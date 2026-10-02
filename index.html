@@ -22,13 +22,18 @@
               <input type="text" placeholder="Search">
               <button><i class="material-icons">search</i></button>
             </form>
-            <img class="material-icons" src="assets/microphone.svg">
+            <button class="microphone-button" type="button" aria-label="Voice search">
+                <img src="assets/microphone.svg" alt="">
+            </button>
         </div>
         <div class="navigation-icons">
             <span class="buttons">
                 <img id="create-icon" src="assets/create.svg" alt="create">
                 Create
             </span>
+            <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Switch to dark mode" aria-pressed="false" title="Switch to dark mode">
+                <i class="material-icons" aria-hidden="true">dark_mode</i>
+            </button>
             <img id="notification" src="assets/notification.svg" alt="notification">
             <img id="avatar" src="https://yt3.ggpht.com/ytc/AIdro_lDEcvZu9Ma2FG9uoD0zoy5fomWlP39McilMj_VU1TjJ_gf71EBO-aqzKbq64nmLcwjHg=s88-c-k-c0x00ffffff-no-rj" alt="">
         </div>
@@ -77,15 +82,27 @@
             <div class="category-section">
                 <P class="catergory_heading">SUBSCRIPTIONS</P>
                 <span class="category">
-                    <i class="material-icons">account_circle</i>
+                    <div class="details">
+                            <div class="profile">
+                              <img class="material-icons" src="https://yt3.ggpht.com/IkYhbAbSKvy-EzdsDQy61LG1jR9a3TDTdBt94AHaUnQusAUbkJYxhaVTQkBUXMa7V6YOE311Vg=s176-c-k-c0x00ffffff-no-rj-mo" alt="Ziao">
+                            </div>
+                    </div>
                     Ziao
                 </span>
                  <span class="category">
-                    <i class="material-icons">account_circle</i>
+                    <div class="details">
+                            <div class="profile">
+                              <img class="material-icons" src="https://yt3.googleusercontent.com/oroxzEPE5giQ8hUcYUFqsmVcxZjxlP0KOzgOf1prL025Q-jxmhynAtQCZn0U2c3W0BdcTvs3=s160-c-k-c0x00ffffff-no-rj" alt=""> 
+                            </div>
+                    </div>
                     MacG
                 </span>
                  <span class="category">
-                    <i class="material-icons">account_circle</i>
+                    <div class="details">
+                            <div class="profile">
+                                <img class="material-icons" src="https://yt3.ggpht.com/vLrmLmonQJKff7HxzL-rBoEE8ccQzGAaany-R3YmDpLgG38sBlug6KWbVbbN3shagqYsI-56=s176-c-k-c0x00ffffff-no-rj-mo" alt="">
+                            </div>
+                    </div>
                     Teachers Tech
                 </span>
 
@@ -93,15 +110,19 @@
              <div class="category-section">
                 <p class="catergory_heading">MORE FROM YOUTUBE</p>
                 <span class="category">
-                    <i class="material-icons">home</i>
+                    <img src="assets/youtube-premium.svg" alt="YouTube Premium">
+                    <!-- <i class="material-icons">home</i> -->
+                     
                     YouTube Premium
                 </span>
                  <span class="category">
-                    <i class="material-icons">home</i>
+                    <img src="assets/Youtube-music.svg" alt="YouTube Music">
+                    <!-- <i class="material-icons">home</i> -->
                     YouTube Music
                 </span>
                  <span class="category">
-                    <i class="material-icons">home</i>
+                    <img src="assets/Youtube-kids.svg" alt="YouTube Kids">
+                    <!-- <i class="material-icons">home</i> -->
                     YouTube Kids
                 </span>
 
@@ -506,5 +527,29 @@
             </div>
         </div>
     </div>
+    <script>
+        const themeToggle = document.getElementById('theme-toggle');
+        const savedTheme = localStorage.getItem('theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+        function setTheme(theme) {
+            const isDark = theme === 'dark';
+            document.body.classList.toggle('dark-mode', isDark);
+            themeToggle.setAttribute('aria-pressed', String(isDark));
+
+            const action = isDark ? 'Switch to light mode' : 'Switch to dark mode';
+            themeToggle.setAttribute('aria-label', action);
+            themeToggle.title = action;
+            themeToggle.querySelector('.material-icons').textContent = isDark ? 'light_mode' : 'dark_mode';
+        }
+
+        setTheme(savedTheme || (prefersDark ? 'dark' : 'light'));
+
+        themeToggle.addEventListener('click', () => {
+            const nextTheme = document.body.classList.contains('dark-mode') ? 'light' : 'dark';
+            localStorage.setItem('theme', nextTheme);
+            setTheme(nextTheme);
+        });
+    </script>
 </body>
 </html>
