@@ -5,9 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
      <link rel="stylesheet" href="style.css">
-
+     
      <link rel="icon" type="image/png" href="/assets/youtube-icon.png">
      <title>YouTube</title>
+
+     <div style="position: relative; padding-bottom: 56.22254758418741%; height: 0;"><iframe src="https://www.loom.com/embed/b608418e723f4c7c838e2e57c3082ad2" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe></div>
 
 </head>
 <body>
@@ -42,10 +44,10 @@
     <div class="mainbody">
         <div class="categories">
             <div class="category-section">
-                <span class="category active">
+                <button class="category active" id="home-navigation" type="button">
                     <i class="material-icons">home</i>
                     Home
-                </span>
+                </button>
                  <span class="category">
                     <i class="material-icons">explore</i>
                     Explore
@@ -69,10 +71,10 @@
                     <i class="material-icons">video_label</i>
                     Your videos
                 </span>
-                <span class="category">
+                <button class="category" id="watch-later-navigation" type="button">
                     <i class="material-icons">watch_later</i>
                     Watch later
-                </span>
+                </button>
                 <span class="category">
                     <i class="material-icons">expand_more</i>
                     Show more
@@ -84,10 +86,10 @@
                 <span class="category">
                     <div class="details">
                             <div class="profile">
-                              <img class="material-icons" src="https://yt3.ggpht.com/IkYhbAbSKvy-EzdsDQy61LG1jR9a3TDTdBt94AHaUnQusAUbkJYxhaVTQkBUXMa7V6YOE311Vg=s176-c-k-c0x00ffffff-no-rj-mo" alt="Ziao">
+                              <img class="material-icons" src="https://yt3.ggpht.com/IkYhbAbSKvy-EzdsDQy61LG1jR9a3TDTdBt94AHaUnQusAUbkJYxhaVTQkBUXMa7V6YOE311Vg=s176-c-k-c0x00ffffff-no-rj-mo" alt="Zaio">
                             </div>
                     </div>
-                    Ziao
+                    Zaio
                 </span>
                  <span class="category">
                     <div class="details">
@@ -110,18 +112,18 @@
              <div class="category-section">
                 <p class="catergory_heading">MORE FROM YOUTUBE</p>
                 <span class="category">
-                    <img src="assets/youtube-premium.svg" alt="YouTube Premium">
+                    <img class="material-icons" src="assets/youtube-premium.svg" alt="YouTube Premium">
                     <!-- <i class="material-icons">home</i> -->
                      
                     YouTube Premium
                 </span>
                  <span class="category">
-                    <img src="assets/Youtube-music.svg" alt="YouTube Music">
+                    <img class="material-icons" src="assets/Youtube-music.svg" alt="YouTube Music">
                     <!-- <i class="material-icons">home</i> -->
                     YouTube Music
                 </span>
                  <span class="category">
-                    <img src="assets/Youtube-kids.svg" alt="YouTube Kids">
+                    <img class="material-icons" src="assets/Youtube-kids.svg" alt="YouTube Kids">
                     <!-- <i class="material-icons">home</i> -->
                     YouTube Kids
                 </span>
@@ -170,6 +172,7 @@
         </div>
         <!-- Video Section -->
         <div class="videos">
+            <h1 class="videos-heading" id="videos-heading">Home</h1>
             <div class="video-grid">
                 <div class="video">
                     <div class="thumbnail">
@@ -184,7 +187,7 @@
                             <div class="video-title">
                                 <p>Madlanga Commission of Inquiry | 29 September 2026</p>
                                 <div class="posted-by">
-                                   <span>Ziao</span>
+                                   <span>Zaio</span>
                                    <div class="view-date">
                                       <span>95k views</span>
                                       <span class="views-icon" aria-hidden="true">
@@ -211,7 +214,7 @@
                               <img src="https://yt3.ggpht.com/IkYhbAbSKvy-EzdsDQy61LG1jR9a3TDTdBt94AHaUnQusAUbkJYxhaVTQkBUXMa7V6YOE311Vg=s176-c-k-c0x00ffffff-no-rj-mo" alt="">  
                             </div>
                             <div class="video-title">
-                                <p>Coding for 2 | Coding bootcamp | ZIAO</p>
+                                <p>Coding for 2 | Coding bootcamp | ZAIO</p>
                                  <div class="posted-by">
                                      <span>Enca</span>
                                      <div class="views-date">
@@ -525,6 +528,7 @@
                         </div>
                 </div>
             </div>
+            <p class="watch-later-empty" id="watch-later-empty" hidden>No videos saved yet.</p>
         </div>
     </div>
     <script>
@@ -550,6 +554,68 @@
             localStorage.setItem('theme', nextTheme);
             setTheme(nextTheme);
         });
+
+        const homeNavigation = document.getElementById('home-navigation');
+        const watchLaterNavigation = document.getElementById('watch-later-navigation');
+        const videosHeading = document.getElementById('videos-heading');
+        const watchLaterEmpty = document.getElementById('watch-later-empty');
+        const videoCards = [...document.querySelectorAll('.video-grid .video')];
+        const watchLaterStorageKey = 'watch-later-videos';
+        let savedVideoIds = new Set();
+
+        try {
+            const savedVideos = JSON.parse(localStorage.getItem(watchLaterStorageKey) || '[]');
+            if (Array.isArray(savedVideos)) {
+                savedVideoIds = new Set(savedVideos);
+            }
+        } catch {
+            savedVideoIds = new Set();
+        }
+
+        videoCards.forEach((video) => {
+            const thumbnail = video.querySelector('.thumbnail');
+            const thumbnailImage = thumbnail.querySelector('img');
+            const videoId = thumbnailImage.getAttribute('src');
+            video.dataset.videoId = videoId;
+
+            const saveButton = document.createElement('button');
+            saveButton.className = 'watch-later-button';
+            saveButton.type = 'button';
+            saveButton.addEventListener('click', () => {
+                if (savedVideoIds.has(videoId)) {
+                    savedVideoIds.delete(videoId);
+                } else {
+                    savedVideoIds.add(videoId);
+                }
+
+                localStorage.setItem(watchLaterStorageKey, JSON.stringify([...savedVideoIds]));
+                updateVideoView(watchLaterNavigation.classList.contains('active') ? 'watch-later' : 'home');
+            });
+            thumbnail.append(saveButton);
+        });
+
+        function updateVideoView(view) {
+            const showingWatchLater = view === 'watch-later';
+            videosHeading.textContent = showingWatchLater ? 'Watch later' : 'Home';
+            videosHeading.hidden = !showingWatchLater;
+            homeNavigation.classList.toggle('active', !showingWatchLater);
+            watchLaterNavigation.classList.toggle('active', showingWatchLater);
+
+            videoCards.forEach((video) => {
+                const isSaved = savedVideoIds.has(video.dataset.videoId);
+                const saveButton = video.querySelector('.watch-later-button');
+                saveButton.innerHTML = `<i class="material-icons" aria-hidden="true">${isSaved ? 'bookmark_added' : 'watch_later'}</i>`;
+                saveButton.setAttribute('aria-label', isSaved ? 'Remove from Watch later' : 'Save to Watch later');
+                saveButton.title = isSaved ? 'Remove from Watch later' : 'Save to Watch later';
+                video.hidden = showingWatchLater && !isSaved;
+            });
+
+            watchLaterEmpty.hidden = !showingWatchLater || savedVideoIds.size > 0;
+        }
+
+        homeNavigation.addEventListener('click', () => updateVideoView('home'));
+        watchLaterNavigation.addEventListener('click', () => updateVideoView('watch-later'));
+        updateVideoView('home');
     </script>
 </body>
 </html>

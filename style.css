@@ -237,10 +237,18 @@ body.dark-mode .microphone-button img {
     align-items: center;
     height: 40px;
     padding: 0 24px;
+    border: 0;
+    color: inherit;
+    background: transparent;
+    font: inherit;
     font-size: 14px;
     font-weight: 400;
+    text-align: left;
     cursor: pointer;
-    
+}
+
+.category img {
+    margin-right: 25px;
 }
 
 .category:hover {
@@ -281,7 +289,7 @@ body.dark-mode .microphone-button img {
 
 .copyright {
     color: var(--muted-color);
-     font-size: 13px;
+    font-size: 13px;
     font-weight: 400;
     margin-bottom: 20px;
 }
@@ -300,6 +308,12 @@ body.dark-mode .microphone-button img {
     padding: 15px;
 }
 
+.videos-heading {
+    padding: 20px 15px 0;
+    font-size: 20px;
+    font-weight: 500;
+}
+
 .video {
     width: calc(25% - 12px);
     margin-right: 12px;
@@ -310,6 +324,50 @@ body.dark-mode .microphone-button img {
 .video .thumbnail img {
     width: 100%;
 
+}
+
+.video[hidden] {
+    display: none;
+}
+
+.thumbnail {
+    position: relative;
+}
+
+.watch-later-button {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 36px;
+    height: 36px;
+    display: grid;
+    place-items: center;
+    border: 0;
+    border-radius: 4px;
+    color: #fff;
+    background: rgba(15, 15, 15, 0.85);
+    opacity: 0;
+    cursor: pointer;
+}
+
+.thumbnail:hover .watch-later-button,
+.watch-later-button:focus-visible {
+    opacity: 1;
+}
+
+.watch-later-button .material-icons {
+    padding: 0;
+}
+
+@media (hover: none) {
+    .watch-later-button {
+        opacity: 1;
+    }
+}
+
+.watch-later-empty {
+    padding: 15px;
+    color: var(--muted-color);
 }
 
 .video .details {
@@ -327,6 +385,7 @@ body.dark-mode .microphone-button img {
     width: 36px;
     height: 36px;
     object-fit: cover;
+    margin-right: 20px;
 }
 
 .video .video-title p {
